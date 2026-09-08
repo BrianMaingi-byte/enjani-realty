@@ -5,7 +5,10 @@
    Signature: topographic contour-line motif (land-survey references)
    =========================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+/* Fonts are loaded via preconnected <link> tags in each page's <head>, not @import —
+   @import blocks the CSS parser and forces a serial fetch waterfall; a direct <link>
+   lets the browser fetch fonts in parallel with this stylesheet. Meaningfully faster
+   on mobile / slower connections. */
 
 :root{
   --forest:#1F3A2E;
@@ -420,3 +423,90 @@ footer ul li a:hover{color:var(--cream);}
 
 .reveal{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease;}
 .reveal.in{opacity:1; transform:none;}
+
+/* ---------- hero search widget ---------- */
+.hero-search{
+  background:var(--cream);
+  border:1px solid rgba(247,244,236,.14);
+  padding:22px;
+  margin-top:38px;
+  box-shadow:0 24px 48px -24px rgba(0,0,0,.45);
+}
+.hero-search form{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr) auto;
+  gap:14px;
+  align-items:end;
+}
+.hero-search .field{display:flex; flex-direction:column; gap:6px;}
+.hero-search label{
+  font-family:'IBM Plex Mono', monospace; font-size:.64rem; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink-soft);
+}
+.hero-search select{
+  padding:12px 12px; border:1px solid var(--line); background:var(--cream);
+  font-family:'Work Sans', sans-serif; font-size:.88rem; color:var(--ink);
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2354584C'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+}
+.hero-search select:focus{outline:none; border-color:var(--forest);}
+.hero-search button{
+  padding:12px 20px; border:none; cursor:pointer;
+  background:var(--clay); color:var(--cream);
+  font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+  transition:background .18s ease;
+  white-space:nowrap;
+}
+.hero-search button:hover{background:#8f532c;}
+@media (max-width:980px){
+  .hero-search form{grid-template-columns:1fr 1fr;}
+  .hero-search button{grid-column:1 / -1;}
+}
+@media (max-width:640px){
+  .hero-search{padding:16px 16px 76px;}
+  .hero-search form{grid-template-columns:1fr;}
+}
+
+/* ---------- floating chat bubble ---------- */
+.chat-bubble{
+  position:fixed; right:22px; bottom:22px; z-index:80;
+  display:flex; align-items:center; gap:10px;
+  background:var(--forest-deep); color:var(--cream);
+  padding:14px 18px 14px 14px;
+  border-radius:999px;
+  box-shadow:0 14px 28px -12px rgba(21,42,33,.5);
+  font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.04em;
+  transition:transform .18s ease, background .18s ease;
+}
+.chat-bubble:hover{transform:translateY(-2px); background:var(--forest);}
+.chat-bubble svg{width:22px; height:22px; flex:none;}
+.chat-bubble .txt{white-space:nowrap;}
+@media (max-width:640px){
+  .chat-bubble{right:16px; bottom:16px; padding:13px;}
+  .chat-bubble .txt{display:none;}
+}
+
+/* ---------- blog / resources ---------- */
+.blog-card{background:var(--cream); border:1px solid var(--line); display:flex; flex-direction:column;}
+.blog-card .plot-art{aspect-ratio:16/10;}
+.blog-card .body{padding:22px 22px 24px;}
+.blog-card .meta-row{
+  display:flex; gap:14px; font-family:'IBM Plex Mono', monospace; font-size:.68rem;
+  color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;
+}
+.blog-card h3{font-size:1.15rem; margin-bottom:10px;}
+.blog-card p{color:var(--ink-soft); font-size:.92rem; margin-bottom:16px;}
+.blog-card .readmore{
+  font-family:'IBM Plex Mono', monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--clay); display:inline-flex; align-items:center; gap:6px;
+}
+.article-body{max-width:70ch;}
+.article-body p{color:var(--ink-soft); font-size:1.02rem;}
+.article-body h2{margin-top:1.6em; font-size:1.5rem;}
+.article-meta{
+  display:flex; gap:18px; flex-wrap:wrap;
+  font-family:'IBM Plex Mono', monospace; font-size:.7rem; text-transform:uppercase;
+  color:var(--ink-soft); letter-spacing:.05em; margin-bottom:8px;
+}
