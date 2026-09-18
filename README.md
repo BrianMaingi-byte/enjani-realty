@@ -1,6 +1,6 @@
 # Enjani Realty — Website
 
-A multi-page static website for **Enjani Realty**, a Nairobi property advisory covering Kilimani, Westlands, Karen, Runda, Lavington and Kileleshwa. Built as a lightweight HTML/CSS/JS site — no build step, no framework, no dependencies beyond Google Fonts.
+A multi-page static website for **Enjani Realty**, a Nairobi property advisory covering Kilimani, Westlands, Riverside, Lavington, Kileleshwa, Runda and Karen. Built as a lightweight HTML/CSS/JS site — no build step, no framework, no dependencies beyond Google Fonts.
 
 ## Live structure
 
@@ -14,7 +14,7 @@ A multi-page static website for **Enjani Realty**, a Nairobi property advisory c
 | About | `about.html` | Company story, agent profile, stats |
 | Contact | `contact.html` | Viewing request form (hands off to WhatsApp), office info |
 
-Every page also carries a floating WhatsApp chat bubble (bottom-right) and a "Guides" link in the main nav and footer.
+Every page also carries a floating Call / WhatsApp / Instagram icon stack (bottom-right) and a "Guides" link in the main nav and footer.
 
 ## File structure
 
@@ -28,7 +28,7 @@ enjani-realty/
 ├── about.html
 ├── contact.html
 ├── css/
-│   └── style.css        # design tokens, layout, components, hero-search, chat bubble, blog cards
+│   └── style.css        # design tokens, layout, components, hero-search, contact stack, blog cards
 ├── js/
 │   └── script.js         # mobile nav, filters, hero-search → query-param filtering, FAQ accordion, scroll reveals, WhatsApp form handoff
 └── README.md
@@ -36,20 +36,21 @@ enjani-realty/
 
 ## Hero search widget → Properties filtering
 
-The homepage hero includes a Location / Property Type / Sale-or-Rent / Max Budget search form. Submitting it redirects to `properties.html?location=..&type=..&use=..` (budget isn't wired into filtering yet — it's UI-only until real listings have price data to filter against). On load, `properties.html` reads those query params and filters the same `data-tags` cards used by the filter chips, showing a "Showing N matches" notice above the grid.
+The homepage hero includes a Location / Property Type / Bedrooms / Sale-or-Rent / Max Budget search form. Submitting it redirects to `properties.html?location=..&type=..&bedrooms=..&use=..` (budget isn't wired into filtering yet — it's UI-only until real listings have price data to filter against). On load, `properties.html` reads those query params and filters the same `data-tags` cards used by the filter chips, showing a "Showing N matches" notice above the grid.
 
-Each property card carries a `data-tags` attribute combining suburb, sale/rent, and property type (e.g. `data-tags="kilimani,sale,apartment"`) — add new tags there if you add new listings or filter categories.
+Each property card carries a `data-tags` attribute combining suburb, sale/rent, property type, and bedroom count (e.g. `data-tags="kilimani,sale,apartment,2bed"`) — add new tags there if you add new listings or filter categories. Bedroom tags follow the `Nbed` format (e.g. `3bed`); studios are tagged `studio` rather than a bedroom count, matching how they're actually marketed.
 
 ## What this static build can't do (and what would need a backend)
 
-Client feedback also asked for indexable pages per location-and-bedroom combination (e.g. a real, crawlable `/kilimani/2-bedroom/` page) and a cascading location → bedroom-count filter. That's genuinely better solved with a real backend — either a WordPress real estate plugin/theme (Easy Property Listings, Houzez, RealHomes) that generates those archive pages automatically with proper SEO, or a database-backed site. Hand-writing static pages for every location × bedroom combination doesn't scale and isn't what's here — this build covers the search widget, filtering, blog, chat bubble, and performance improvements, all of which work standalone.
+Client feedback also asked for indexable pages per location-and-bedroom combination (e.g. a real, crawlable `/kilimani/2-bedroom/` page). The search widget and query-param filtering here covers the interactive/UX side of that request, but it doesn't create separate crawlable URLs per combination — that's genuinely better solved with a real backend, either a WordPress real estate plugin/theme (Easy Property Listings, Houzez, RealHomes) that generates those archive pages automatically with proper SEO, or a database-backed site. Hand-writing static pages for every location × bedroom combination doesn't scale and isn't what's here.
 
 ## Design system
 
-- **Palette** — forest green, moss, warm sand/cream, clay/bronze accent (see `:root` variables at the top of `style.css`)
+- **Palette** — black and gold: near-black backgrounds (`--forest-deep`, `--forest`), gold accents (`--clay`, `--moss`, `--moss-light`), warm cream/sand neutrals (see `:root` variables at the top of `style.css`)
 - **Type** — [Fraunces](https://fonts.google.com/specimen/Fraunces) (display serif), [Work Sans](https://fonts.google.com/specimen/Work+Sans) (body), [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) (prices, labels, specs)
 - **Signature motif** — a topographic contour-line pattern (`.contour-field` / `.contour-dark`) used in the hero, CTA bands, and logo mark
-- **Property imagery** — placeholder listings use custom line-art "parcel" graphics (`.plot-art`) instead of stock photos; swap these for real property photos when available
+- **Property imagery** — placeholder listings use custom line-art "parcel" graphics (`.plot-art`, gold-to-black gradient) instead of stock photos; swap these for real property photos when available
+- **Floating contact stack** (`.contact-stack`, bottom-right on every page) — Call, WhatsApp and Instagram icons using the client's real contact details
 
 ## Running locally
 
@@ -65,12 +66,17 @@ No build tools required. Either:
 
 ## Before going live — replace placeholder content
 
-- [ ] WhatsApp number (currently `254700000000`) — appears in nav CTAs, listing cards, the floating chat bubble on every page, and `contact.html`'s form handler in `js/script.js`
+- [x] WhatsApp/Call number — updated sitewide to +254 790 905 989
+- [x] Instagram handle — updated sitewide to @enjani_realty
 - [ ] Email address (`hello@enjanirealty.co.ke`)
 - [ ] Office addresses (footer, `contact.html`)
 - [ ] Agent name/photo (`about.html`)
 - [ ] Listings — currently sample data (Acacia Court, Ridgeview Residences, etc.); replace with real properties and photos
 - [ ] Stats (180+ homes placed, KSh 4.2B transaction value, etc.)
+
+## Locations
+
+Seven suburbs, each with its own filter chip, hero-search option, and area-guide card: Kilimani, Westlands, Riverside, Lavington, Kileleshwa, Runda, Karen. Runda and Karen are tracked as separate locations (not combined) per the client's location list. Property cards carry a matching `data-tags` value (e.g. `riverside`) — add that tag to any new listing so it surfaces under the right filters.
 
 ## Deployment options
 

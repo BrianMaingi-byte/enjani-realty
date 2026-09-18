@@ -1,5 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* keep the mobile nav's top offset in sync with the real header height
+     (the header can wrap to two lines on narrow screens with a longer tagline) */
+  const header = document.querySelector('.site-header');
+  const setHeaderHeight = () => {
+    if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+  };
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight);
+
+  /* floating contact stack: collapsed by default, expands on tap */
+  const contactStack = document.querySelector('.contact-stack');
+  const contactToggle = contactStack?.querySelector('.toggle');
+  if (contactToggle) {
+    contactToggle.addEventListener('click', () => {
+      const isOpen = contactStack.classList.toggle('open');
+      contactToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+
   /* mobile nav */
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('nav.primary');
@@ -36,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const wanted = ['location', 'type', 'use']
       .map(key => (params.get(key) || '').toLowerCase())
       .filter(val => val && val !== 'any');
+    const bedrooms = (params.get('bedrooms') || '').toLowerCase();
+    if (bedrooms && bedrooms !== 'any') wanted.push(`${bedrooms}bed`);
 
     if (wanted.length) {
       chips.forEach(c => c.classList.remove('active'));
@@ -94,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const name = form.querySelector('[name="name"]').value || 'there';
       const msg = `Hello Enjani Realty, my name is ${name}. I'd like to schedule a viewing / get more information.`;
-      window.open(`https://wa.me/254700000000?text=${encodeURIComponent(msg)}`, '_blank');
+      window.open(`https://wa.me/254790905989?text=${encodeURIComponent(msg)}`, '_blank');
     });
   }
 });
