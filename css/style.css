@@ -1,14 +1,8 @@
 /* ===========================================================
-   ENJANI REALTY — design tokens
-   Palette: forest / moss / sand / clay / bronze / ink
+   ENJANI REALTY — design tokens (black & gold)
    Type: Fraunces (display) · Work Sans (body) · IBM Plex Mono (data)
    Signature: topographic contour-line motif (land-survey references)
    =========================================================== */
-
-/* Fonts are loaded via preconnected <link> tags in each page's <head>, not @import —
-   @import blocks the CSS parser and forces a serial fetch waterfall; a direct <link>
-   lets the browser fetch fonts in parallel with this stylesheet. Meaningfully faster
-   on mobile / slower connections. */
 
 :root{
   --forest:#1A1A1A;
@@ -91,11 +85,9 @@ p{margin:0 0 1em;}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%23F7F4EC' stroke-opacity='0.08' stroke-width='1.4'%3E%3Cpath d='M-20 80 C 120 20, 260 140, 400 60 S 640 90, 700 40'/%3E%3Cpath d='M-20 140 C 120 80, 260 200, 400 120 S 640 150, 700 100'/%3E%3Cpath d='M-20 200 C 120 140, 260 260, 400 180 S 640 210, 700 160'/%3E%3Cpath d='M-20 340 C 140 420, 300 300, 420 400 S 620 340, 700 420'/%3E%3Cpath d='M-20 400 C 140 480, 300 360, 420 460 S 620 400, 700 480'/%3E%3Cpath d='M-20 460 C 140 540, 300 420, 420 520 S 620 460, 700 540'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* property card "photo" placeholder — contour + parcel silhouette, used
-   in place of stock photography across the demo site */
 .plot-art{
   aspect-ratio:4/3;
-  background:linear-gradient(155deg, var(--moss) 0%, var(--forest-deep) 100%);
+  background:linear-gradient(155deg, var(--moss-light) 0%, var(--forest-deep) 100%);
   position:relative;
   overflow:hidden;
 }
@@ -211,8 +203,10 @@ nav.primary a.active::after{
 }
 .hero h1{
   color:var(--cream);
-  font-size:clamp(2.4rem, 4.6vw, 4.1rem);
-  max-width:14ch;
+  font-size:clamp(2.2rem, 4.2vw, 3.8rem);
+  max-width:16ch;
+  text-transform:uppercase;
+  letter-spacing:.01em;
 }
 .hero h1 em{font-style:italic; color:var(--moss-light);}
 .hero p.lede{
@@ -467,7 +461,7 @@ footer ul li a:hover{color:var(--cream);}
   .hero-search button{grid-column:1 / -1;}
 }
 @media (max-width:640px){
-  .hero-search{padding:16px 70px 20px 16px;}
+  .hero-search{padding:16px 82px 16px 16px;}
   .hero-search form{grid-template-columns:1fr;}
 }
 

@@ -9,16 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setHeaderHeight();
   window.addEventListener('resize', setHeaderHeight);
 
-  /* floating contact stack: collapsed by default, expands on tap */
-  const contactStack = document.querySelector('.contact-stack');
-  const contactToggle = contactStack?.querySelector('.toggle');
-  if (contactToggle) {
-    contactToggle.addEventListener('click', () => {
-      const isOpen = contactStack.classList.toggle('open');
-      contactToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-  }
-
   /* mobile nav */
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('nav.primary');
@@ -49,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* apply filters passed in from the hero search widget (properties.html?location=..&type=..&use=..) */
+  /* apply filters passed in from the hero search widget (properties.html?location=..&type=..&bedrooms=..&use=..) */
   if (cards.length) {
     const params = new URLSearchParams(window.location.search);
     const wanted = ['location', 'type', 'use']
